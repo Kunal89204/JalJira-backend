@@ -21,13 +21,17 @@ export class AuthService {
 
     if (error) {
       if (error.code === 'invalid_credentials') {
-        throw new UnauthorizedException('Invalid email or password');
+        throw new UnauthorizedException('Invalid email or password', {cause:"i am casue", description:"i am descriptions"});
       }
 
       // fallback for other Supabase auth errors
       throw new BadRequestException(error.message || 'Authentication failed');
     }
 
-    return data;
+    return {
+      success:true,
+      message:"Login Successfull",
+      data
+    };
   }
 }
